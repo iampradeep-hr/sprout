@@ -17,7 +17,7 @@ class _BottomRouter extends State<BottomRouter> {
   final List<Widget> screens = [
     HomePage(),
     TipsPage(),
-    BmiPage(),
+    BmiCalculator(),
     SettingsPage(),
   ];
 

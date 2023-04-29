@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 // CAROUSEL SLIDER FROM SCRATCH
 
 class CarouselSlider extends StatefulWidget {
-   List<String> imagesUrl;
-   CarouselSlider({
+  List<String> imagesUrl;
+  CarouselSlider({
     required this.imagesUrl,
-  }) ;
+  });
   @override
   State<CarouselSlider> createState() => _CarouselSliderState(imagesUrl);
 }
@@ -55,7 +55,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
     return Column(
       children: [
         SizedBox(
-          height: 200,
+          height: 180,
           child: PageView.builder(
             itemCount: images.length,
             onPageChanged: (value) {
@@ -100,7 +100,8 @@ class _CarouselSliderState extends State<CarouselSlider> {
                           : Colors.grey.shade300,
                     ),
                   )),
-        )
+        ),
+        
       ],
     );
   }

@@ -36,6 +36,15 @@ class TipsPage extends ConsumerWidget {
                   CarouselSlider(
                     imagesUrl: imagesUrl,
                   ),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    child: Text("Blogs",
+                        style: TextStyle(
+                            fontFamily: "Lexend",
+                            fontSize: 35,
+                            color: Theme.of(context).colorScheme.primary)),
+                  ),
                   for (var blog in blogData)
                     ExpandableBlogPost(
                       blogModel: BlogModel(

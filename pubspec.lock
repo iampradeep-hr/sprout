@@ -549,14 +549,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
-  timeline_tile:
+  timeline_list:
     dependency: "direct main"
     description:
-      name: timeline_tile
-      sha256: b481289986c5bf39a565088a26ae2283d09270256028f305c34505da4066cc70
+      name: timeline_list
+      sha256: ef1dff1f1d0b9daf8350635594f2b33c52b12410771bf12a8d5976c1aac156c4
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "0.0.6"
   typed_data:
     dependency: transitive
     description:
