@@ -35,12 +35,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blueAccent,
           child: Icon(
-            Icons.chat,
+            Icons.message_sharp,
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ChatBotPage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBotPage()));
           }),
       body: SafeArea(
         child: Column(

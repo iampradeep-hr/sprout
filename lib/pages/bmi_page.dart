@@ -81,6 +81,11 @@ class _BmiCalculatorState extends State<BmiCalculator> {
             onPressed: _calculateBmi,
           ),
           Text('BMI: ${_bmi.toStringAsFixed(2)}'),
+          ElevatedButton(
+              onPressed: () {
+               
+              },
+              child: Text("click"))
         ],
       ),
     );

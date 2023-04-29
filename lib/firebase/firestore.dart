@@ -10,6 +10,9 @@ final firestoreProvider = Provider<MyFirestore>((ref) {
   return MyFirestore();
 });
 
+final CollectionReference videoRef =
+    FirebaseFirestore.instance.collection("youtubevideolinks");
+
 class MyFirestore {
   final CollectionReference projectsRef =
       FirebaseFirestore.instance.collection("facts");
@@ -55,6 +58,23 @@ class MyFirestore {
     }
   }
 
+  Future<List<String>> getHomePageVideos() async {
+    final List<String> videoUrls = [];
+    try {
+      await videoRef
+          .where("appear_on_homepage", isEqualTo: true)
+          .get()
+          .then((value) {
+        for (var e in value.docs) {
+          videoUrls.add(e["url"]);
+        }
+      });
+      return videoUrls;
+    } catch (e) {
+      return videoUrls; // add this line
+    }
+  }
+
   Future<List<ChildModel>> getChildren() async {
     try {
       final user = await FirebaseAuth.instance.currentUser;
@@ -69,8 +89,6 @@ class MyFirestore {
 
       childrenList = querySnapshot.docs;
 
-// Now you can use the childrenList as needed, such as iterating over the documents and accessing their data:
-      // Now you can use the childrenList as needed, such as iterating over the documents and accessing their data:
       for (var childSnapshot in childrenList) {
         final docid = childSnapshot.id;
         final childName = childSnapshot.get("name");
@@ -78,9 +96,6 @@ class MyFirestore {
         final childBirthWeight = childSnapshot.get("birthWeight");
         final childBirthHeight = childSnapshot.get("birthHeight");
         final childDob = childSnapshot.get("dob").toDate();
-
-        // Calculate the difference between today's date and the child's dob
-        final differenceInDays = DateTime.now().difference(childDob).inDays;
 
         childrenData.add(ChildModel(
             docId: docid,
@@ -100,35 +115,43 @@ class MyFirestore {
   void getVaccinationRemainder() async {
     try {
       final user = await FirebaseAuth.instance.currentUser;
-      List<DocumentSnapshot> childrenList = [];
-      List<DocumentSnapshot> vaccineList = [];
+      final childrenList = <DocumentSnapshot>[];
+      final vaccineList = <DocumentSnapshot>[];
 
-      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+      final querySnapshot = await FirebaseFirestore.instance
           .collection('userdata')
           .doc(user!.email)
-          .collection("children")
+          .collection('children')
           .get();
+      childrenList.addAll(querySnapshot.docs);
 
-      childrenList = querySnapshot.docs;
+      final querySnapshot2 =
+          await FirebaseFirestore.instance.collection('vaccines').get();
+      vaccineList.addAll(querySnapshot2.docs);
 
       for (var childSnapshot in childrenList) {
         final docid = childSnapshot.id;
-        final childDob = childSnapshot.get("dob").toDate();
-
-        // Calculate the difference between today's date and the child's dob
+        final childname = childSnapshot.get("name");
+        final childDob = childSnapshot.get('dob').toDate();
         final differenceInDays = DateTime.now().difference(childDob).inDays;
-        print(" difference in dob and today: $differenceInDays");
-      }
+        final vaccinemap = childSnapshot.get("vaccineMap");
 
-      final QuerySnapshot querySnapshot2 =
-          await FirebaseFirestore.instance.collection('vaccines').get();
-      vaccineList = querySnapshot2.docs;
-      for (var vaccine in vaccineList) {
-        final days = vaccine.get("days");
-        print("when to be taken: $days");
+        for (var i = 0; i < vaccineList.length; i++) {
+          final days = vaccineList[i].get('days');
+
+          int res = days - differenceInDays;
+          res = res.abs();
+          print(res);
+          if (res <= 7) {
+            if (vaccinemap[i] == false) {
+              print(
+                  'Reminder: $childname is due for ${vaccineList[i].get('name')} in $days days.');
+            }
+          }
+        }
       }
     } catch (e) {
-      print("Error getting blog data: $e");
+      print('Error getting vaccination remainder: $e');
     }
   }
 }

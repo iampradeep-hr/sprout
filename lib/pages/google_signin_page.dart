@@ -163,11 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset(
-                              "assets/images/google.svg",
-                              width: 30,
-                              height: 30,
-                            ),
+                            Icon(Icons.login),
                             const Padding(
                               padding: EdgeInsets.only(left: 24, right: 8),
                               child: Text(

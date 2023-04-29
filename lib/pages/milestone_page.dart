@@ -37,8 +37,8 @@ class TabBarDemo extends StatelessWidget {
             children: [
               NewbornDevelopmentScreen(),
               BabiesDevelopmentScreen(),
-              NewbornDevelopmentScreen(),
-              NewbornDevelopmentScreen(),
+              ToddlersDevelopmentScreen(),
+              PreSchoolersDevelopmentScreen(),
             ],
           ),
         ),
@@ -130,6 +130,128 @@ class BabiesDevelopmentScreen extends StatelessWidget {
           "Baby development at 6-7 months is an exciting time, as your baby's comes alive. Get development tips and find out how to spot development delay.",
       'image':
           "https://raisingchildren.net.au/__data/assets/image/0016/48031/baby-development-7-months.jpg",
+    }
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: _data.length,
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 8,
+          child: ExpansionTile(
+            title: Text(_data[index]['title']!),
+            children: [
+              MyImageLoader(imageUrl: _data[index]['image']!),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  _data[index]['content']!,
+                  style: TextStyle(
+                    fontFamily: "Lexend",
+                    fontSize: 15,
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ToddlersDevelopmentScreen extends StatelessWidget {
+  final List<Map<String, String>> _data = [
+    {
+      'title': 'Toddler development for 12-15 months',
+      'content':
+          'Your toddler spends a lot of time working out what things do and what to do with them. Read more about toddler development and delay at 12-15 months.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0024/48048/child-development-12-15-months.jpg"
+    },
+    {
+      'title': 'Toddler development for 15-18 months',
+      'content':
+          ' Your toddler is curious about everything and keen to play,experiment and explore. Heres how to help toddler development at 15-18 months and spot delay.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0017/48050/child-development-15-18-months.jpg"
+    },
+    {
+      'title': 'Toddler development for 18-24 months',
+      'content':
+          ' At 18-24 months, your toddler might have strong emotions like frustration,shame and excitement. Here how to boost toddler development and spot delay.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0019/48052/child-development-18-24-months.jpg"
+    },
+    {
+      'title': 'Toddler development for 2-3 years',
+      'content':
+          'At 2-3 years, your toddler is going through many emotions and learning about other people feelings. Here how to help toddler development and spot delay.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0018/48042/child-development-2-3-years.jpg"
+    },
+    {
+      'title': 'Developmental delay',
+      'content':
+          ' Developmental delay is when young children are slower than expected to develon ckille. See vor GP or nurse if.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0017/48023/baby-development-3-months.jpg"
+    }
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: _data.length,
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 8,
+          child: ExpansionTile(
+            title: Text(_data[index]['title']!),
+            children: [
+              MyImageLoader(imageUrl: _data[index]['image']!),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  _data[index]['content']!,
+                  style: TextStyle(
+                    fontFamily: "Lexend",
+                    fontSize: 15,
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class PreSchoolersDevelopmentScreen extends StatelessWidget {
+  final List<Map<String, String>> _data = [
+    {
+      'title': 'preschooler development for 3-4 years',
+      'content':
+          'At 3-4 years, your preschooler is interested in playing and making friends with others. Here’s how to help with this and other parts of child development.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0018/48060/child-development-three-to-four-years.jpg"
+    },
+    {
+      'title': 'preschooler development for 4-5 years',
+      'content':
+          'At 4-5 years, your preschooler is learning to express emotion and likes to be around people. Read how to help child development and spot delay at this age.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0023/48056/child-development-four-to-five-years.jpg"
+    },
+    {
+      'title': 'Developmental delay',
+      'content':
+          ' Developmental delay is when young children are slower than expected to develop skills. See your GP or nurse if you think your child has developmentaldelay.',
+      'image':
+          "https://raisingchildren.net.au/__data/assets/image/0029/47693/autism-spectrum-disorder-social-story-example.jpg"
     }
   ];
 

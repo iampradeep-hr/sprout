@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tinyhood/firebase/firestore.dart';
 import 'package:tinyhood/model/blog_model.dart';
+import 'package:tinyhood/widgets/youtube_videos.dart';
 import '../widgets/blog_post.dart';
 import '../widgets/image_slider.dart';
 
@@ -53,6 +54,16 @@ class TipsPage extends ConsumerWidget {
                         blog.imagePath,
                       ),
                     ),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    child: Text("Videos",
+                        style: TextStyle(
+                            fontFamily: "Lexend",
+                            fontSize: 35,
+                            color: Theme.of(context).colorScheme.primary)),
+                  ),
+                  VideoGridView()
                 ],
               ),
             ),
