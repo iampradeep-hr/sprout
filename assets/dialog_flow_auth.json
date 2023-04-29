@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "vacbot-avoi",
+  "private_key_id": "075c85b7c3440ad00f195888ca43d55f4a008421",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCfjC7WTrWW7hXU\nvnUFaSNW9QCcDmAm+alD8qHhqTTUPcpskaYkP4EYmetE/5+9pQjaErx3/vOZPClz\nKc2mieXYiHV/VEjhhUceeczCuhaFhIzj2kIKHicm880BB5vkbdgHsBlhVyXHnzJn\nf1q21n4pDICSkSrOxyDZihhRqTXeFWKS53+2brd3jrVWtBx51ZQVlzLOwokOJjsG\nmySByaHpgFnporzKKqoAwDF0zykbuMs04ZE6ESNkOmFqQZ+iebEpGn1Cr6RupOIT\nMbsJgyG5CO3G+Rni7XVYfhAzngOOiwXRhLXzVxeEJbQcEWtduGnX3l2hf/dDnNb3\nZv9sAHxVAgMBAAECggEAAq7KwtPD/eu29kLVmOexrm6kOfuL5lvgWsIjsrWzq7X2\nR2kTkBx5QT6lVB2wQ/IYegJCpQnmcrcuQz96s8gx0zhIMYHrT8976KlHpiaW5lva\nOqKa5ayoH+GNmuzT1D18mnR9mMNsYTTuFgtwLQ7iRDJvnwdN3vg+Nyo5SnY776YJ\nmwTh4iRPlBadtXCFz83XF9XuaAaIN9NYwdsW3iXBiU4RmfWEwB5M+f8fHZXCRf1m\nv4sI7hHklo/PPSgLqVKSfxCkLEARYCDZGrOvaywVInv/zQXQgdj+tZlZ7grfx9Rj\ng5svHrCVA5t4wpWqWDF4dDqpAVdAKXJ4OA3VsfxygQKBgQDSIuJq32ctzN4O4TU5\nSayBado0EhyRyp1nm6Db+d5cC4zesI+UI+TcMUTHWH5hHZED5QnxC3jvsAT2liVz\n9TXvU1ZcA3EecV08McgHmsKYVYrw5DXilqnyqueq+PIqMNHMMNuci30r0hePsBz1\nwzd/LdZg0KwRhhZAAsKsmpQ85QKBgQDCXrdILHj3r8FsXq0OyRkRWjGOT7Yrrn7v\nA960CHiWdm9SVLD2F2Stru/F8HBoV2+fItNVlnnZdsmslCj9XNU43AGiqoNfYZVq\ng9fJEfItupNLKt3O1tVEvzqDGuQbpE4NfacSd0CrEh3aiSBhqHwexS8xUQAmn6Td\n61ZTyfS6sQKBgDrOEFagFhu3DR1U4LQbbe75VFrmBqC19r6byrREhHl1sgJPnp5y\nPQVxtDGlDhjXUVGpstKFx14r//eRpQGCSYmj5LLzM6C1UMYbmEKoiHRg2/T1qC60\nwvJp6VLrP7mW198wfQSd9HVi4b0QJ8qOyuUISsnlG4H76BYZr6jlyT4RAoGARtvo\nzXMJFqMITM2nIYDGlsDe2BbPPtV6iQBMLC36aD/9DXK6oLyeg4MG/o5NLHzTwJwd\nl1IoUdMwaq4I03UIdpYeMoMfKaKVqiMug6r7MxiVog2al1FSpqFgX3NqPXmEyv5H\n7j9zX+pW39il6XRW65DPR5dUCsCghhbJffpeMcECgYEAz4AC8fNKROvpY+Fl/GVB\n9nxZ3yz5pwhM+2jxEJFz/WSRKIvKupX2koEIZsXMsjI+KHNerqBpIQ7UbjlWzAeR\nzPCOmAYma5FLpGmYCbi3JeDLowcM5z415qa/bcqeyF+fYXleQvK4cODs8fK4bU9w\n/IYhKPHoCSvBGpoZMZsrA+Q=\n-----END PRIVATE KEY-----\n",
+  "client_email": "vaccine-bot@vacbot-avoi.iam.gserviceaccount.com",
+  "client_id": "108331822885691838872",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vaccine-bot%40vacbot-avoi.iam.gserviceaccount.com"
+}

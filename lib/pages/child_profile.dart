@@ -46,10 +46,10 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       color: Theme.of(context).colorScheme.secondaryContainer,
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -61,7 +61,7 @@ class ProfileCard extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSecondaryContainer,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -69,7 +69,7 @@ class ProfileCard extends StatelessWidget {
                   child.gender == "M" ? Icons.male : Icons.female,
                   color: Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   "Dob: ${child.dob}",
                   style: TextStyle(
@@ -79,7 +79,7 @@ class ProfileCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -89,7 +89,7 @@ class ProfileCard extends StatelessWidget {
                       Icons.line_weight,
                       color: Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       "Weight: ${child.birthWeight} kg",
                       style: TextStyle(

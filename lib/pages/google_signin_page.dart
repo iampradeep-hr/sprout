@@ -120,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: 50,
                         ),
-                        
                         const SizedBox(width: 20.0, height: 100.0),
                         DefaultTextStyle(
                           style: const TextStyle(
@@ -176,7 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   fontFamily: "Lexend",
                                   fontSize: 20,
-                                  color: Colors.black54,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
