@@ -1,8 +1,11 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tinyhood/model/blog_model.dart';
+import 'package:tinyhood/model/child_vaccine_model.dart';
 import 'package:tinyhood/model/children_model.dart';
 import 'package:tinyhood/model/vaccine_model.dart';
 
@@ -112,7 +115,8 @@ class MyFirestore {
     }
   }
 
-  void getVaccinationRemainder() async {
+  Future<List<String>> getVaccinationReminder() async {
+    final List<String> remainders = [];
     try {
       final user = await FirebaseAuth.instance.currentUser;
       final childrenList = <DocumentSnapshot>[];
@@ -122,11 +126,14 @@ class MyFirestore {
           .collection('userdata')
           .doc(user!.email)
           .collection('children')
+          .orderBy("dob", descending: false)
           .get();
       childrenList.addAll(querySnapshot.docs);
 
-      final querySnapshot2 =
-          await FirebaseFirestore.instance.collection('vaccines').get();
+      final querySnapshot2 = await FirebaseFirestore.instance
+          .collection("vaccines")
+          .orderBy("id", descending: false)
+          .get();
       vaccineList.addAll(querySnapshot2.docs);
 
       for (var childSnapshot in childrenList) {
@@ -140,18 +147,64 @@ class MyFirestore {
           final days = vaccineList[i].get('days');
 
           int res = days - differenceInDays;
-          res = res.abs();
-          print(res);
-          if (res <= 7) {
+          int res2 = res.abs();
+          // // print(res);
+          // print("${vaccineList[i].get("days")}");
+          // print(vaccinemap[i]);
+          if (res2 <= 7) {
             if (vaccinemap[i] == false) {
-              print(
-                  'Reminder: $childname is due for ${vaccineList[i].get('name')} in $days days.');
+              remainders.add(
+                  '> $childname is due for ${vaccineList[i].get("name")} in $days days.');
+              print("$i: ${vaccinemap[i]}");
+              // print(
+              //     'Reminder: $childname is due for ${vaccineList[i].get("name")} in $days days.');
             }
           }
         }
       }
+      return remainders;
     } catch (e) {
       print('Error getting vaccination remainder: $e');
+      return [];
     }
   }
+
+  Future<List<String>> getVaccinationReminder2() async {
+    final List<String> remainders = [];
+    try {
+      final user = await FirebaseAuth.instance.currentUser;
+      final childrenList = <DocumentSnapshot>[];
+      final vaccineList = <DocumentSnapshot>[];
+
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('userdata')
+          .doc(user!.email)
+          .collection('children')
+          .orderBy("dob", descending: false)
+          .get();
+      childrenList.addAll(querySnapshot.docs);
+
+      final querySnapshot2 = await FirebaseFirestore.instance
+          .collection("vaccines")
+          .orderBy("id", descending: false)
+          .get();
+      vaccineList.addAll(querySnapshot2.docs);
+
+      for (var childSnapshot in childrenList) {
+        final docid = childSnapshot.id;
+        final childname = childSnapshot.get("name");
+        final childDob = childSnapshot.get('dob').toDate();
+        final differenceInDays = DateTime.now().difference(childDob).inDays;
+        final vaccinemap = childSnapshot.get("vaccineMap");
+      }
+      return remainders;
+    } catch (e) {
+      print('Error getting vaccination remainder: $e');
+      return [];
+    }
+  }
+
+ 
 }
+
+

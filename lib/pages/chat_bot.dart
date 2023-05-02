@@ -39,7 +39,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
             Expanded(child: MessagesScreen(messages: messages)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onInverseSurface,
               child: Row(
                 children: [
                   Expanded(
@@ -56,7 +56,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
                       },
                       icon: Icon(
                         Icons.send,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                       ))
                 ],
               ),

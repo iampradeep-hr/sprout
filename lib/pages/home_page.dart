@@ -1,7 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tinyhood/firebase/firebaseauth.dart';
 import 'package:tinyhood/firebase/firestore.dart';
 import 'package:tinyhood/model/children_model.dart';
@@ -15,9 +13,15 @@ final firebaseAuthData = FutureProvider<String?>((ref) async {
   return service.getUserName();
 });
 
-final childrenDataProvider = FutureProvider<List<ChildModel>>((ref) async {
+final childrenDataProvider =
+    FutureProvider.autoDispose<List<ChildModel>>((ref) async {
   final service = ref.watch(firestoreProvider);
   return service.getChildren();
+});
+
+final remainderProvider = FutureProvider.autoDispose<List<String>>((ref) async {
+  final service = ref.watch(firestoreProvider);
+  return service.getVaccinationReminder();
 });
 
 class HomePage extends StatefulWidget {
@@ -30,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    firestore.getVaccinationRemainder();
+    firestore.getVaccinationReminder();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blueAccent,
@@ -39,7 +43,8 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBotPage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ChatBotPage()));
           }),
       body: SafeArea(
         child: Column(
@@ -103,55 +108,47 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Consumer(builder: (context, watch, _) {
                         final childrenData = watch.watch(childrenDataProvider);
-                        return RefreshIndicator(
-                          onRefresh: () async {
-                            // Refresh the children's data by calling the Firestore API again
-                            await watch
-                                .refresh(firestoreProvider)
-                                .getChildren();
-                          },
-                          child: childrenData.when(
-                            data: (children) {
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: children.length,
-                                itemBuilder: (context, index) {
-                                  final child = children[index];
-                                  return InkWell(
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) {
-                                          return ChildProfile(
-                                            childModel: children[index],
-                                          );
-                                        },
-                                      ));
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.all(4),
-                                      child: Row(
-                                        children: [
-                                          CircleAvatar(
-                                            child: Icon(Icons.person),
+                        return childrenData.when(
+                          data: (children) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: children.length,
+                              itemBuilder: (context, index) {
+                                final child = children[index];
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return ChildProfile(
+                                          childModel: children[index],
+                                        );
+                                      },
+                                    ));
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.all(4),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          child: Icon(Icons.person),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          child.name,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            child.name,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                            loading: () => CircularProgressIndicator(),
-                            error: (error, stackTrace) => Text('Error: $error'),
-                          ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          loading: () => CircularProgressIndicator(),
+                          error: (error, stackTrace) => Text('Error: $error'),
                         );
                       }),
                     ],
@@ -230,7 +227,57 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  children: [Text("notifications")],
+                  children: [
+                    Consumer(builder: (context, ref, child) {
+                      return ref.watch(remainderProvider).when(
+                        data: (data) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .tertiaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Text(
+                              "$data",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 18,
+                                fontFamily: "Lexend",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
+                        error: (error, stackTrace) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Text(
+                              'Error getting vaccination reminder: $error',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 18,
+                                fontFamily: "Lexend",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
+                        loading: () {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+                    }),
+                  ],
                 ),
               ),
             )

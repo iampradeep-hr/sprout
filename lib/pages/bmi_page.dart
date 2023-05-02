@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class BmiCalculator extends StatefulWidget {
   @override
@@ -83,11 +85,25 @@ class _BmiCalculatorState extends State<BmiCalculator> {
           Text('BMI: ${_bmi.toStringAsFixed(2)}'),
           ElevatedButton(
               onPressed: () {
-               
+                launchUrlStart(
+                    url:
+                        "https://bassammakorvi-autism-appli-xulv2j.streamlit.app/");
               },
-              child: Text("click"))
+              child: Text(
+                "Autism Screening test",
+                style: TextStyle(
+                    fontFamily: "Lexend",
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer),
+              ))
         ],
       ),
     );
+  }
+}
+
+Future<void> launchUrlStart({required String url}) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw 'Could not launch $url';
   }
 }

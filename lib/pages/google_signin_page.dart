@@ -2,7 +2,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tinyhood/pages/bottom_page_router.dart';
 
@@ -116,10 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(
-                          width: 50,
-                        ),
                         const SizedBox(width: 20.0, height: 100.0),
                         DefaultTextStyle(
                           style: const TextStyle(
